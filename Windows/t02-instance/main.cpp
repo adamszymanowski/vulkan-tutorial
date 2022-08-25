@@ -25,7 +25,35 @@ private:
 
 	void initialize_vulkan()
 	{
+		create_vulkan_instance();
+	}
 
+	void create_vulkan_instance()
+	{
+		VkApplicationInfo application_info{};
+		application_info.sType = VK_STRUCTURE_TYPE_APPLICATION_INFO;
+		application_info.pApplicationName = "Hello Triangle";
+		application_info.apiVersion = VK_MAKE_VERSION(1, 0, 0);
+		application_info.pEngineName = "No Engine";
+		application_info.engineVersion = VK_MAKE_VERSION(1, 0, 0);
+		application_info.apiVersion = VK_API_VERSION_1_0;
+
+		VkInstanceCreateInfo instance_info{};
+		instance_info.sType = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO;
+		instance_info.pApplicationInfo = &application_info;
+
+		uint32_t glfw_extension_count = 0;
+		const char** glfw_extensions;
+		glfw_extensions = glfwGetRequiredInstanceExtensions(&glfw_extension_count);
+
+		instance_info.enabledExtensionCount = glfw_extension_count;
+		instance_info.ppEnabledExtensionNames = glfw_extensions;
+		instance_info.enabledLayerCount = 0;
+
+		if (vkCreateInstance(&instance_info, nullptr, &vulkan_instance) != VK_SUCCESS)
+		{
+			throw std::runtime_error("Failed to create Vulkan instance!");
+		}
 	}
 
 	void main_loop()
@@ -38,6 +66,7 @@ private:
 
 	void clean_up()
 	{
+		vkDestroyInstance(vulkan_instance, nullptr);
 		glfwDestroyWindow(m_window);
 		glfwTerminate();
 	}
@@ -47,16 +76,17 @@ private:
 	m_height = 600;
 
 	GLFWwindow* m_window;
+	VkInstance vulkan_instance;
 };
 
 int main()
 {
 	std::cout << "Tutorial 02: Instance\n";
-	HelloTriangleAplication app;
+	HelloTriangleAplication application;
 
 	try
 	{
-		app.run();
+		application.run();
 	}
 	catch (std::exception& e)
 	{
