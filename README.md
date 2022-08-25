@@ -3,6 +3,9 @@ Me doing [Vulkan Tutorial](https://vulkan-tutorial.com/)
 
 - [tutorial 00 (development environment)](https://vulkan-tutorial.com/Development_environment)
 
+## references
+- [glfw Window](https://www.glfw.org/docs/3.3/window_guide.html#window_object)
+
 ## Setup
 ### Windows
 Visual Studio 2019
