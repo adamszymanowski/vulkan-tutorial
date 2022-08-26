@@ -11,6 +11,7 @@ public:
 	void run()
 	{
 		initialize_window();
+		initialize_vulkan();
 		main_loop();
 		clean_up();
 	}
