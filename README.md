@@ -5,6 +5,7 @@ Me doing [Vulkan Tutorial](https://vulkan-tutorial.com/)
 
 ## references
 - [glfw Window](https://www.glfw.org/docs/3.3/window_guide.html#window_object)
+- [strcmp](https://cplusplus.com/reference/cstring/strcmp/)
 
 ## Setup
 ### Windows
@@ -15,6 +16,8 @@ Unpack precompiled GLFW [https://github.com/glfw/glfw/releases/download/3.3.8/gl
 - `C:\glfw-3.3.8.bin.WIN64`
 
 **Visual Studio 2019**
+- Project -> Properties -> C/C++ -> Language -> C++ Language Standard
+  * ISO C++ 17 Standard (`/std:c++17`)
 - Project -> Properties -> C/C++ -> General -> Additional Include Directories
   * `C:\glfw-3.3.8.bin.WIN64\include`
   * `C:\VulkanSDK\1.3.224.0\Include`
