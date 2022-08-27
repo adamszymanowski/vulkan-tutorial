@@ -118,14 +118,19 @@ private:
 		instance_info.sType = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO;
 		instance_info.pApplicationInfo = &application_info;
 
-
 		auto extensions = get_reqired_extensions();
 		instance_info.enabledExtensionCount = static_cast<uint32_t>(extensions.size());
 		instance_info.ppEnabledExtensionNames = extensions.data();
+		
+		VkDebugUtilsMessengerCreateInfoEXT debug_info{};
+
 		if (m_enable_validation_layers)
 		{
 			instance_info.enabledLayerCount = static_cast<uint32_t>(m_validation_layers.size());
 			instance_info.ppEnabledLayerNames = m_validation_layers.data();
+
+			populate_debug_messenger(debug_info);
+			instance_info.pNext = (VkDebugUtilsMessengerCreateInfoEXT*) & debug_info;
 		}
 		else
 		{
